@@ -1,0 +1,234 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('artprt.keystore')
+            storePassword 'Vestern74'
+            keyAlias 'artprt'
+            keyPassword 'Vestern74'
+        }
+        staging{
+            storeFile file('artprt.keystore')
+            storePassword 'Vestern74'
+            keyAlias 'artprt'
+            keyPassword 'Vestern74'
+        }
+        stagrelease{
+            storeFile file('artprt.keystore')
+            storePassword 'Vestern74'
+            keyAlias 'artprt'
+            keyPassword 'Vestern74'
+        }
+        debug {
+            storeFile file('artprt.keystore')
+            storePassword 'Vestern74'
+            keyAlias 'artprt'
+            keyPassword 'Vestern74'
+        }
+        mock{
+            storeFile file('artprt.keystore')
+            storePassword 'Vestern74'
+            keyAlias 'artprt'
+            keyPassword 'Vestern74'
+        }
+    }
+    compileSdk 33
+    defaultConfig {
+        applicationId "com.infotech.rfid"
+        minSdk 23
+        targetSdk 32
+
+        versionCode Integer.parseInt(project.property("VERSION_CODE"))
+        println "Version code:"+versionCode
+        versionName project.property("VERSION_MAJOR")+"."+project.property("VERSION_MIDDLE")+"."+project.property("VERSION_MINOR")
+        println "Vesion name:"+versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            debuggable = true
+            buildConfigField 'String', 'REST_URL', "\"https://"+project.property('HOST_PROD')+"/api/\""
+            buildConfigField 'String', 'WS_URL', "\"wss://"+project.property('HOST_PROD')+":"+project.property("PORT_WS_PROD")+"\""
+            buildConfigField 'String', 'HOST', "\""+project.property('HOST_PROD')+"\""
+            buildConfigField "int", "PORT", project.property('PORT_TCP_PROD')
+            buildConfigField "boolean", "USE_TLS", project.property('USE_TLS_PROD')
+            //buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_PROD")+"\""
+            buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_PROD")+"\""
+            buildConfigField "String", "MOCK_LOGIN", project.property("MOCK_LOGIN_PROD")
+            buildConfigField "String", "MOCK_PASSWORD", project.property("MOCK_PASSWORD_PROD")
+            buildConfigField "String", "DONOR_MAP_ID", project.property("DONOR_MAP_ID")
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        staging{
+            shrinkResources false
+            minifyEnabled false
+            debuggable = true
+            buildConfigField 'String', 'REST_URL', "\"https://"+project.property('HOST_STAGE')+"/api/\""
+            buildConfigField 'String', 'WS_URL', "\"wss://"+project.property('HOST_STAGE')+":"+project.property("PORT_WS_STAGE")+"\""
+            buildConfigField 'String', 'HOST', "\""+project.property('HOST_STAGE')+"\""
+            buildConfigField "int", "PORT", project.property('PORT_TCP_STAGE')
+            buildConfigField "boolean", "USE_TLS", project.property('USE_TLS_STAGE')
+            buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_STAGE")+"\""
+            buildConfigField "String", "MOCK_LOGIN", project.property("MOCK_LOGIN_STAGE")
+            buildConfigField "String", "MOCK_PASSWORD", project.property("MOCK_PASSWORD_STAGE")
+            buildConfigField "String", "DONOR_MAP_ID", project.property("DONOR_MAP_ID")
+            signingConfig signingConfigs.staging
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        stagrelease{
+            shrinkResources false
+            minifyEnabled false
+            debuggable = false
+            buildConfigField 'String', 'REST_URL', "\"https://"+project.property('HOST_STAGE')+"/api/\""
+            buildConfigField 'String', 'WS_URL', "\"wss://"+project.property('HOST_STAGE')+":"+project.property("PORT_WS_STAGE")+"\""
+            buildConfigField 'String', 'HOST', "\""+project.property('HOST_STAGE')+"\""
+            buildConfigField "int", "PORT", project.property('PORT_TCP_STAGE')
+            buildConfigField "boolean", "USE_TLS", project.property('USE_TLS_STAGE')
+            buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_STAGE")+"\""
+            buildConfigField "String", "MOCK_LOGIN", project.property("MOCK_LOGIN_STAGE")
+            buildConfigField "String", "MOCK_PASSWORD", project.property("MOCK_PASSWORD_STAGE")
+            buildConfigField "String", "DONOR_MAP_ID", project.property("DONOR_MAP_ID")
+            signingConfig signingConfigs.staging
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            debuggable = true
+            buildConfigField 'String', 'REST_URL', "\"https://"+project.property('HOST_DEBUG')+"/api/\""
+            buildConfigField 'String', 'WS_URL', "\"wss://"+project.property('HOST_DEBUG')+":"+project.property("PORT_WS_DEBUG")+"\""
+            buildConfigField 'String', 'HOST', "\""+project.property('HOST_DEBUG')+"\""
+            buildConfigField "int", "PORT", project.property('PORT_TCP_DEBUG')
+            buildConfigField "boolean", "USE_TLS", project.property('USE_TLS_DEBUG')
+            buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_DEBUG")+"\""
+            buildConfigField "String", "MOCK_LOGIN", project.property("MOCK_LOGIN_STAGE")
+            buildConfigField "String", "MOCK_PASSWORD", project.property("MOCK_PASSWORD_STAGE")
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "DONOR_MAP_ID", project.property("DONOR_MAP_ID")
+            signingConfig signingConfigs.debug
+        }
+        mock{
+            shrinkResources false
+            minifyEnabled false
+            debuggable = true
+            buildConfigField 'String', 'REST_URL', "\"https://"+project.property('HOST_STAGE')+"/api/\""
+            buildConfigField 'String', 'WS_URL', "\"wss://"+project.property('HOST_STAGE')+":"+project.property("PORT_WS_STAGE")+"\""
+            buildConfigField 'String', 'HOST', "\""+project.property('HOST_STAGE')+"\""
+            buildConfigField "int", "PORT", project.property('PORT_TCP_STAGE')
+            buildConfigField "boolean", "USE_TLS", project.property('USE_TLS_STAGE')
+            buildConfigField "String", "CONFIG_BASE_URL", "\""+project.property("CONFIG_STAGE")+"\""
+            buildConfigField "String", "MOCK_LOGIN", project.property("MOCK_LOGIN_STAGE")
+            buildConfigField "String", "MOCK_PASSWORD", project.property("MOCK_PASSWORD_STAGE")
+            buildConfigField "String", "DONOR_MAP_ID", project.property("DONOR_MAP_ID")
+            signingConfig signingConfigs.mock
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    dataBinding{
+        enabled = true
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    kapt{
+        correctErrorTypes true
+    }
+    lint {
+        abortOnError false
+        absolutePaths false
+        lintConfig file('lint.xml')
+    }
+    namespace 'com.infotech.rfid'
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$xcore_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$cl_version"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$live_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$live_version_ext"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$live_version"
+
+    implementation "androidx.navigation:navigation-runtime:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+
+    //implementation "com.esri.arcgisruntime:arcgis-android:$arcgis_version"
+    //implementation "com.esri:arcgis-maps-kotlin:$arcgis_version"
+
+    implementation 'com.metarhia.jstp:jstp:0.11.2'
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_version"
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:$okhttp_version"))
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    compileOnly 'androidx.annotation:annotation:1.0.0'
+    compileOnly 'com.metarhia.jstp:jstp-compiler:0.4.0'
+    annotationProcessor 'com.metarhia.jstp:jstp-compiler:0.4.0'
+
+    implementation "com.tinder.scarlet:scarlet:$scarlet_version"
+    implementation "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
+    implementation "com.tinder.scarlet:lifecycle-android:$scarlet_version"
+    implementation "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
+    implementation "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    implementation "androidx.concurrent:concurrent-futures-ktx:1.1.0"
+
+    implementation "androidx.biometric:biometric:$biometric_version"
+
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher:$permission_version"
+    kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:$permission_version"
+
+    implementation "com.github.barteksc:android-pdf-viewer:$pdfview_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // https://mvnrepository.com/artifact/org.openoffice/juh
+    implementation group: 'org.openoffice', name: 'juh', version: '2.4.1'
+
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}

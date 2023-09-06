@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="SmallLogoTextStyles">
+        <item name="android:fontFamily">@font/exo2_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextColor">@color/gray_white</item>
+        <item name="android:lineHeight" tools:targetApi="28">24sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">600</item>
+    </style>
+    <style name="SmallBoldTitleTextStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight" tools:targetApi="28">18sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">500</item>
+    </style>
+    <style name="SmallTitleTextStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight" tools:targetApi="28">18sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">400</item>
+    </style>
+    <style name="AsButtonTextStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:lineHeight" tools:targetApi="28">23sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">600</item>
+    </style>
+
+    <style name="SignTextStyle">
+        <item name="android:fontFamily">@font/exo2_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight" tools:targetApi="28">24sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">400</item>
+    </style>
+    <style name="InputTextStyles">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="hintTextColor">@color/hint_text_color</item>
+        <item name="android:lineHeight" tools:targetApi="28">17sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">500</item>
+    </style>
+
+    <style name="ButtonNormalTextStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight" tools:targetApi="28">24sp</item>
+        <item name="android:textFontWeight" tools:targetApi="28">500</item>
+    </style>
+
+
+</resources>

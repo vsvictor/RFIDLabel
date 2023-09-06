@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/detailsFragment"
+        android:icon="@drawable/ic_detail"
+        android:title="@string/action_detail" />
+
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_map"
+        android:title="@string/map" />
+
+    <item
+        android:id="@+id/involvedFragment"
+        android:icon="@drawable/ic_involved"
+        android:title="@string/involved" />
+
+    <item
+        android:id="@+id/progressFragment"
+        android:icon="@drawable/ic_progress"
+        android:title="@string/progress" />
+
+</menu>

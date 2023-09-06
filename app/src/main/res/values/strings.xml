@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Інвентаризація</string>
+
+    <string name="understand">Зрозуміло</string>
+    <string name="no_connection">Відсутнє зʼєднання</string>
+    <string name="check_internet">Перевірте зʼєднання з інтернетом</string>
+    <string name="new_password">Створіть новий пароль</string>
+
+    <string name="action_detail">Деталі події</string>
+    <string name="map">Мапа</string>
+    <string name="involved">Задіяні СіЗ</string>
+    <string name="progress">Хід ліквідації</string>
+
+    <string name="text_logo_1">Система управління силами та\nзасобами цивільного захисту</string>
+
+    <string name="login_hint">Логін (ПІБ)</string>
+    <string name="password_hint">Пароль</string>
+    <string name="sign_check">Для входу перевірте наявність наступних компонентів:</string>
+    <string name="sign_1">&#186; агент підпису</string>
+    <string name="sign_2">&#186; середовище для виконання java додатків</string>
+    <string name="sign_bottom">Також Ви маєте бути певні, що маєте право доступу до кабінету</string>
+    <string name="login_button">Увійти в систему</string>
+
+    <string name="pp">Політика конфіденційності</string>
+
+    <string name="validation_error">Помилка валідації</string>
+    <string name="connection_error">Немає звʼязку з мережею</string>
+    <string name="check_data">Перевірте правильність введених даних\nта спробуйте ще раз</string>
+
+    <!-- Strings used for fragments for navigation -->
+
+</resources>

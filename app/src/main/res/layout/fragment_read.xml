@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.infotech.rfid.ui.write.ReadViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/big"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.write.ReadFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvID"
+            android:text="ID"
+            android:textSize="@dimen/xmedium_text"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bID"
+            android:visibility="gone"
+            android:text="Generate ID"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/tvID"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edID"
+            android:background="@color/gray_back"
+            android:maxLines="2"
+            android:layout_marginRight="@dimen/medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/bID"
+            app:layout_constraintTop_toTopOf="@id/bID"
+            app:layout_constraintBottom_toBottomOf="@id/bID"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/llarge"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:text="Name"
+            android:textSize="@dimen/xmedium_text"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/medium"
+            app:layout_constraintTop_toBottomOf="@id/edID"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edName"
+            android:text="Name"
+            android:background="@color/gray_back"
+            android:layout_marginRight="@dimen/medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/xlbig"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvComment"
+            android:text="Comment"
+            android:textSize="@dimen/xmedium_text"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/medium"
+            app:layout_constraintTop_toBottomOf="@id/edName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edComment"
+            android:gravity="top"
+            android:maxLines="3"
+            android:minHeight="@dimen/xxxxlarge"
+            android:text="Comment of the name"
+            android:background="@color/gray_back"
+            android:layout_marginRight="@dimen/medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.infotech.rfid.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        tools:context="com.infotech.rfid.ui.login.LoginFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLogoDSNS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxxllarge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_logo_dsns" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLogoText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xlbig"
+            android:gravity="center"
+            android:text="@string/text_logo_1"
+            android:textAllCaps="true"
+            android:textAppearance="@style/SmallLogoTextStyles"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivLogoDSNS" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/tvLogoText1"
+            app:layout_constraintRight_toRightOf="@id/tvLogoText1"
+            app:layout_constraintTop_toBottomOf="@id/tvLogoText1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/xlbig"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLoginHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_hint"
+                    android:textAppearance="@style/InputTextStyles"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xlbig"
+                    android:layout_marginTop="@dimen/xtiny"
+                    android:afterTextChanged="@{(editable)->model.onLoginChanged(editable)}"
+                    android:background="@drawable/rect_white_with_corner"
+                    android:hint="@string/login_hint"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/small"
+                    android:paddingRight="@dimen/small"
+                    android:singleLine="true"
+                    android:textAppearance="@style/InputTextStyles"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:layout_constraintTop_toBottomOf="@id/tvLoginHint" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPasswordHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/xtiny"
+                    android:text="@string/password_hint"
+                    android:textAppearance="@style/InputTextStyles"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edLogin" />
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:expandedHintEnabled="false"
+                    app:hintEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    android:gravity="bottom"
+                    app:layout_constraintTop_toBottomOf="@id/tvPasswordHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/xlbig"
+                        android:layout_marginTop="@dimen/xtiny"
+                        android:afterTextChanged="@{(editable)->model.onPasswordChanged(editable)}"
+                        android:background="@drawable/rect_white_with_corner"
+                        android:inputType="textPassword"
+                        android:hint="@string/password_hint"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/small"
+                        android:paddingRight="@dimen/small"
+                        android:singleLine="true"
+                        android:textAppearance="@style/InputTextStyles"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/cursor" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNewPassword"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/clLogin"
+                app:layout_constraintBottom_toBottomOf="@id/clLogin"
+                android:layout_marginTop="@dimen/xlbig"
+                android:visibility="invisible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNewPasswordHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_password"
+                    android:textAppearance="@style/InputTextStyles"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/edNewPassword" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edNewPassword"
+                    android:afterTextChanged="@{(editable)->model.onLoginChanged(editable)}"
+                    android:background="@drawable/rect_white_with_corner"
+                    android:hint="@string/new_password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/InputTextStyles"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:paddingLeft="@dimen/small"
+                    android:paddingRight="@dimen/small"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/xlbig" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/big_button_height"
+            android:layout_marginTop="@dimen/xbig"
+            android:background="@drawable/big_button"
+            android:enabled="false"
+            android:onClick="@{model::onLogin}"
+            app:layout_constraintLeft_toLeftOf="@id/clAll"
+            app:layout_constraintRight_toRightOf="@id/clAll"
+            app:layout_constraintTop_toBottomOf="@id/clAll">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_button"
+                android:textAppearance="@style/ButtonNormalTextStyle"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:textAllCaps="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:visibility="invisible"
+            android:id="@+id/llPP"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginBottom="@dimen/small"
+                android:padding="@dimen/medium"
+                android:text="@string/pp"
+                android:textAllCaps="true"
+                android:textAppearance="@style/AsButtonTextStyle"
+                android:textColor="@color/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

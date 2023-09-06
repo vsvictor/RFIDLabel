@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.infotech.rfid.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/writeFragment"
+        android:name="com.infotech.rfid.ui.write.WriteFragment"
+        android:label="WriteFragment" />
+    <fragment
+        android:id="@+id/readFragment"
+        android:name="com.infotech.rfid.ui.write.ReadFragment"
+        android:label="ReadFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.infotech.rfid.ui.MainFragment"
+        android:label="MainFragment" />
+
+</navigation>

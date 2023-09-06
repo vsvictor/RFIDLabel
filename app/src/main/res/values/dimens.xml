@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="one">1dp</dimen>
+    <dimen name="tiny">4dp</dimen>
+    <dimen name="xtiny">6dp</dimen>
+    <dimen name="small">8dp</dimen>
+    <dimen name="medium">16dp</dimen>
+    <dimen name="xmedium">24dp</dimen>
+    <dimen name="big">32dp</dimen>
+    <dimen name="xlbig">40dp</dimen>
+    <dimen name="xbig">48dp</dimen>
+    <dimen name="llarge">56dp</dimen>
+    <dimen name="xxxllarge">88dp</dimen>
+    <dimen name="xxxxlarge">128dp</dimen>
+
+    <dimen name="xmedium_text">24sp</dimen>
+
+    <dimen name="big_button_height">@dimen/xbig</dimen>
+
+</resources>
