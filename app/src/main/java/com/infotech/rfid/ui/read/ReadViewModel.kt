@@ -7,9 +7,4 @@ import com.infotech.rfid.base.BaseViewModel
 
 class ReadViewModel(override val app: Application) : BaseViewModel<Object>(app) {
     private val TAG = ReadViewModel::class.java.simpleName
-    override fun onBackPressed() {
-        super.onBackPressed()
-        Log.d(TAG, "OnBack")
-        navController?.navigate(R.id.mainFragment)
-    }
 }

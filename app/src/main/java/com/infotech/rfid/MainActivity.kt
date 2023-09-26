@@ -37,7 +37,6 @@ import com.infotech.rfid.utils.*
 import org.koin.java.KoinJavaComponent
 import java.nio.charset.Charset
 
-//@RuntimePermissions
 @Layout(R.layout.activity_main)
 class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBottomBarVisible, OnLanguageChanged, OnProfile, OnClear, OnEntity{
     private val TAG = MainActivity::class.java.simpleName
@@ -92,46 +91,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBo
         val navController = findNavController(R.id.nav_host_fragment)
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
-    override fun onStart() {
-        super.onStart()
-        //onInitNFCWithPermissionCheck()
-    }
-    override fun onResume() {
-        super.onResume()
-        //onResumeNFCWithPermissionCheck()
-    }
-    override fun onPause() {
-        super.onPause()
-        //onStopNFCWithPermissionCheck()
-    }
-/*
-    @SuppressLint("NeedOnRequestPermissionsResult")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
-*/
-    //@NeedsPermission(android.Manifest.permission.NFC)
-    fun onInitNFC(){
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-        val inte = Intent(this, javaClass)
-        inte.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        pendingIntent = PendingIntent.getActivity(this, 0,inte , PendingIntent.FLAG_MUTABLE)
-    }
-    //@NeedsPermission(android.Manifest.permission.NFC)
-    fun onResumeNFC(){
-        nfcAdapter?.let {
-            it.enableForegroundDispatch(this, pendingIntent, null, null)
-        }
-    }
-    //@NeedsPermission(android.Manifest.permission.NFC)
-    fun onStopNFC(){
-        nfcAdapter?.let {
-            it.disableForegroundDispatch(this)
-        }
-    }
-
-
     override fun getNavHostFragment(): Fragment? {
         return supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
     }

@@ -16,10 +16,6 @@ import java.util.UUID
 
 class WriteViewModel(override val app: Application) : BaseViewModel<Object>(app) {
     var onEditData: OnEditData? = null
-    override fun onBackPressed() {
-        super.onBackPressed()
-        navController?.navigate(R.id.mainFragment)
-    }
     fun generateID(view: View){
         val uuid = UUID.randomUUID()
         onEditData?.generateID(uuid)

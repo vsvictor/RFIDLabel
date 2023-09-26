@@ -8,9 +8,13 @@ import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import com.infotech.rfid.OnClear
 import com.infotech.rfid.R
 import com.infotech.rfid.base.BaseFragment
@@ -23,7 +27,6 @@ import java.util.Locale
 import java.util.UUID
 
 
-//@RuntimePermissions
 @Layout(R.layout.fragment_write)
 class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEditData {
     private val TAG = WriteFragment::class.java.simpleName
@@ -51,23 +54,15 @@ class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEd
         val ndefMessage = NdefMessage(rec)
         writeTag(ndefMessage, detectedTag)
     }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.onEditData = this
         binding.model = viewModel
-        //Toast.makeText(requireContext(), "Edit data and write to RFID", Toast.LENGTH_SHORT).show()
-    }
-/*
-    @SuppressLint("NeedOnRequestPermissionsResult")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
-*/
-
-    override fun onResume() {
-        super.onResume()
-        binding.bID.performClick()
     }
     fun makeTextRecord(text: String): NdefRecord? {
         val lang: String = Locale.getDefault().language
@@ -85,7 +80,6 @@ class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEd
             NdefRecord.RTD_TEXT, ByteArray(0), data
         )
     }
-    //@NeedsPermission(android.Manifest.permission.NFC)
     open fun writeTag(ndefMessage: NdefMessage?, tag: Tag?){
         try {
             counter++

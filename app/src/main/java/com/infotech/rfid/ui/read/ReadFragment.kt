@@ -7,11 +7,13 @@ import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.infotech.rfid.OnClear
 import com.infotech.rfid.R
@@ -30,27 +32,18 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>(){
     private val TAG = ReadFragment::class.java.simpleName
     private var onClear: OnClear? = null
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.edID.isEnabled = false
         binding.edName.isEnabled = false
         binding.edComment.isEnabled = false
-        requireActivity().onBackInvokedDispatcher.unregisterOnBackInvokedCallback {
-            findNavController().navigate(R.id.mainFragment)
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //requireActivity().onBackPressedDispatcher.addCallback(this)
         binding.model = viewModel
     }
-    override fun onResume() {
-        super.onResume()
-        val isEnable = requireActivity().onBackPressedDispatcher.hasEnabledCallbacks()
-        Log.d(TAG, "on Resume, InBackPressedCallBack is "+isEnable)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
     }
@@ -71,7 +64,6 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>(){
     private fun readFromIntent(intent: Intent) {
         val action = intent.action
         if (NfcAdapter.ACTION_TAG_DISCOVERED == action || NfcAdapter.ACTION_TECH_DISCOVERED == action || NfcAdapter.ACTION_NDEF_DISCOVERED == action) {
-            val myTag = intent.getParcelableExtra<Parcelable>(NfcAdapter.EXTRA_TAG) as Tag?
             val rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
             var msgs = mutableListOf<NdefMessage>()
             if (rawMsgs != null) {
@@ -105,10 +97,5 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>(){
         binding.edID.setText(data.id.toString())
         binding.edName.setText(data.name)
         binding.edComment.setText(data.comment)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        Log.d(TAG, "OnBack")
     }
 }

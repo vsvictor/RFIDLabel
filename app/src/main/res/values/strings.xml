@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Інвентаризація</string>
+    <string name="app_name">RFID RW</string>
 
     <string name="understand">Зрозуміло</string>
     <string name="no_connection">Відсутнє зʼєднання</string>
