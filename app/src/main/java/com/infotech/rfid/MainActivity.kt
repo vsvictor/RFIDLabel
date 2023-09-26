@@ -12,7 +12,10 @@ import android.nfc.tech.MifareUltralight
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import android.view.KeyEvent
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,11 +35,9 @@ import com.infotech.rfid.ui.common.*
 import com.infotech.rfid.ui.login.LoginViewModel
 import com.infotech.rfid.utils.*
 import org.koin.java.KoinJavaComponent
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
 import java.nio.charset.Charset
 
-@RuntimePermissions
+//@RuntimePermissions
 @Layout(R.layout.activity_main)
 class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBottomBarVisible, OnLanguageChanged, OnProfile, OnClear, OnEntity{
     private val TAG = MainActivity::class.java.simpleName
@@ -76,15 +77,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBo
             sh.prefs.edit().remove("start_from").commit()
             navController.navigate(startFragment)
         }
-/*
-        Log.d(TAG, "Width:"+this.screenWidth+"px")
-        Log.d(TAG, "Height:"+this.screenHeight+"px")
-        Log.d(TAG, "Width:"+this.toDP(this.screenWidth.toFloat())+"dp")
-        Log.d(TAG, "Height:"+this.toDP(this.screenHeight.toFloat())+"dp")
-        Log.d(TAG, "Status Bar Height:"+this.statusBarHeight+"px")
-        Log.d(TAG, "Status Bar Height:"+this.toDP(this.statusBarHeight.toFloat())+"dp")
-
- */
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -102,35 +94,37 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBo
     }
     override fun onStart() {
         super.onStart()
-        onInitNFCWithPermissionCheck()
+        //onInitNFCWithPermissionCheck()
     }
     override fun onResume() {
         super.onResume()
-        onResumeNFCWithPermissionCheck()
+        //onResumeNFCWithPermissionCheck()
     }
     override fun onPause() {
         super.onPause()
-        onStopNFCWithPermissionCheck()
+        //onStopNFCWithPermissionCheck()
     }
+/*
     @SuppressLint("NeedOnRequestPermissionsResult")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
     }
-    @NeedsPermission(android.Manifest.permission.NFC)
+*/
+    //@NeedsPermission(android.Manifest.permission.NFC)
     fun onInitNFC(){
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         val inte = Intent(this, javaClass)
         inte.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         pendingIntent = PendingIntent.getActivity(this, 0,inte , PendingIntent.FLAG_MUTABLE)
     }
-    @NeedsPermission(android.Manifest.permission.NFC)
+    //@NeedsPermission(android.Manifest.permission.NFC)
     fun onResumeNFC(){
         nfcAdapter?.let {
             it.enableForegroundDispatch(this, pendingIntent, null, null)
         }
     }
-    @NeedsPermission(android.Manifest.permission.NFC)
+    //@NeedsPermission(android.Manifest.permission.NFC)
     fun onStopNFC(){
         nfcAdapter?.let {
             it.disableForegroundDispatch(this)
@@ -173,15 +167,4 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActViewModel>(), OnBo
             val gson = provideGSON()
             strToSave = gson.toJson(entity)
         }
-    fun writeTag(tag: Tag) {
-        strToSave?.let {str ->
-            MifareUltralight.get(tag)?.use { ultralight ->
-                ultralight.connect()
-                Charset.forName("US-ASCII").also { usAscii ->
-                    Log.d(TAG, "Write tag")
-                    ultralight.writePage(8, str.toByteArray(usAscii))
-                }
-            }
-        }
-    }
 }

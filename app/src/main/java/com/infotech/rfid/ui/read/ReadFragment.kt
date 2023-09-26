@@ -12,6 +12,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import com.infotech.rfid.OnClear
 import com.infotech.rfid.R
 import com.infotech.rfid.base.BaseFragment
@@ -28,22 +29,30 @@ import kotlin.experimental.and
 class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>(){
     private val TAG = ReadFragment::class.java.simpleName
     private var onClear: OnClear? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.edID.isEnabled = false
         binding.edName.isEnabled = false
         binding.edComment.isEnabled = false
+        requireActivity().onBackInvokedDispatcher.unregisterOnBackInvokedCallback {
+            findNavController().navigate(R.id.mainFragment)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                viewModel.onBackPressed()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callback)
+        //requireActivity().onBackPressedDispatcher.addCallback(this)
         binding.model = viewModel
+    }
+    override fun onResume() {
+        super.onResume()
+        val isEnable = requireActivity().onBackPressedDispatcher.hasEnabledCallbacks()
+        Log.d(TAG, "on Resume, InBackPressedCallBack is "+isEnable)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -98,4 +107,8 @@ class ReadFragment : BaseFragment<FragmentReadBinding, ReadViewModel>(){
         binding.edComment.setText(data.comment)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d(TAG, "OnBack")
+    }
 }

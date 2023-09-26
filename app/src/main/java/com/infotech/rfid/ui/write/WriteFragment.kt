@@ -18,14 +18,12 @@ import com.infotech.rfid.base.annotations.Layout
 import com.infotech.rfid.data.model.Entity
 import com.infotech.rfid.databinding.FragmentWriteBinding
 import com.infotech.rfid.di.provideGSON
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
 import java.nio.charset.Charset
 import java.util.Locale
 import java.util.UUID
 
 
-@RuntimePermissions
+//@RuntimePermissions
 @Layout(R.layout.fragment_write)
 class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEditData {
     private val TAG = WriteFragment::class.java.simpleName
@@ -59,11 +57,13 @@ class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEd
         binding.model = viewModel
         //Toast.makeText(requireContext(), "Edit data and write to RFID", Toast.LENGTH_SHORT).show()
     }
+/*
     @SuppressLint("NeedOnRequestPermissionsResult")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
     }
+*/
 
     override fun onResume() {
         super.onResume()
@@ -85,7 +85,7 @@ class WriteFragment : BaseFragment<FragmentWriteBinding, WriteViewModel>(), OnEd
             NdefRecord.RTD_TEXT, ByteArray(0), data
         )
     }
-    @NeedsPermission(android.Manifest.permission.NFC)
+    //@NeedsPermission(android.Manifest.permission.NFC)
     open fun writeTag(ndefMessage: NdefMessage?, tag: Tag?){
         try {
             counter++
